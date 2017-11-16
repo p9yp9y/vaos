@@ -24,6 +24,13 @@
 		<github.global.server>github</github.global.server>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>clojars.org</id>
+			<url>http://clojars.org/repo</url>
+		</repository>
+	</repositories>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -64,6 +71,12 @@
 			<groupId>p9yp9y.vaos</groupId>
 			<artifactId>vaos-dev</artifactId>
 			<version>0.0.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>nginx-clojure</groupId>
+			<artifactId>nginx-clojure-embed</artifactId>
+			<version>0.4.3</version>
 		</dependency>
 	</dependencies>
 

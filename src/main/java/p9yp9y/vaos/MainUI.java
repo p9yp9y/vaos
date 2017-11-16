@@ -93,10 +93,13 @@ public class MainUI extends UI {
 			}
 		});
 		
+		TextField url = new TextField("URL");
+		url.setValue("https://bintray.com/p9yp9y/vaos/download_file?file_path=p9yp9y%2Fvaos%2Fvaos-hello-app%2F0.0.1-SNAPSHOT%2Fvaos-hello-app-0.0.1-20171116.120548-1.jar");
+		url.setWidth("900px");
 		Button loadButton = new Button("Load");
 		loadButton.addClickListener(e -> {
 			try {
-				URL[] jarUrls = new URL[] {new URL("file:///home/andris/workspace3/vaos-hello-app/target/vaos-hello-app-0.0.1-SNAPSHOT.jar")};
+				URL[] jarUrls = new URL[] {new URL(url.getValue())};
 				new InstallerUtil().start(jarUrls, "p9yp9y.vaos.hello.HelloApplication", new String[] {});
 			} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException
 					| InvocationTargetException | MalformedURLException e1) {
@@ -107,6 +110,7 @@ public class MainUI extends UI {
 		
 		contentLayout.addComponent(name);
 		contentLayout.addComponent(button);
+		contentLayout.addComponent(url);
 		contentLayout.addComponent(loadButton);
 
 		layout.addComponents(topPanel, contentLayout);
@@ -116,12 +120,12 @@ public class MainUI extends UI {
 
 		setContent(layout);
 
-		try {
-			startXterm();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		try {
+//			startXterm();
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		startTime();
 	}
 
