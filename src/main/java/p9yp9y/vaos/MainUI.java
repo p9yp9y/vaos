@@ -127,6 +127,8 @@ public class MainUI extends UI {
 //			e1.printStackTrace();
 //		}
 		startTime();
+		
+		//nodejs /home/andris/wetty/app.js -p 3001
 	}
 
 	private void addWindow() {
