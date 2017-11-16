@@ -3,6 +3,9 @@ package p9yp9y.vaos;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
@@ -25,6 +28,8 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
+
+import p9yp9y.vaos.installer.InstallerUtil;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser
@@ -87,8 +92,22 @@ public class MainUI extends UI {
 				e1.printStackTrace();
 			}
 		});
+		
+		Button loadButton = new Button("Load");
+		loadButton.addClickListener(e -> {
+			try {
+				URL[] jarUrls = new URL[] {new URL("file:///home/andris/workspace3/vaos-hello-app/target/vaos-hello-app-0.0.1-SNAPSHOT.jar")};
+				new InstallerUtil().start(jarUrls, "p9yp9y.vaos.hello.HelloApplication", new String[] {});
+			} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException
+					| InvocationTargetException | MalformedURLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		
 		contentLayout.addComponent(name);
 		contentLayout.addComponent(button);
+		contentLayout.addComponent(loadButton);
 
 		layout.addComponents(topPanel, contentLayout);
 		layout.setSizeFull();
