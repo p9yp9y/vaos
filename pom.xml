@@ -6,7 +6,7 @@
 	<groupId>p9yp9y</groupId>
 	<artifactId>vaos</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.2</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>vaos</name>
 
 	<prerequisites>
