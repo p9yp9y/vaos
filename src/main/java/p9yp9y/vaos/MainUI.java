@@ -1,4 +1,4 @@
-package vaos;
+package p9yp9y.vaos;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,7 +37,7 @@ import com.vaadin.ui.Window;
  */
 @Theme("mytheme")
 @Push
-public class MyUI extends UI {
+public class MainUI extends UI {
 
 	private TextArea textArea;
 	private OutputStream out;
@@ -176,7 +176,7 @@ public class MyUI extends UI {
 	}
 
 	@WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
-	@VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
+	@VaadinServletConfiguration(ui = MainUI.class, productionMode = false)
 	public static class MyUIServlet extends VaadinServlet {
 	}
 }
