@@ -70,7 +70,7 @@
 		<dependency>
 			<groupId>p9yp9y.vaos</groupId>
 			<artifactId>vaos-dev</artifactId>
-			<version>0.0.3</version>
+			<version>0.0.4-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>

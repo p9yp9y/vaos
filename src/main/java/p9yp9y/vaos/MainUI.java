@@ -94,7 +94,7 @@ public class MainUI extends UI {
 		});
 		
 		TextField url = new TextField("URL");
-		url.setValue("https://bintray.com/p9yp9y/vaos/download_file?file_path=p9yp9y%2Fvaos%2Fvaos-hello-app%2F0.0.1-SNAPSHOT%2Fvaos-hello-app-0.0.1-20171116.120548-1.jar");
+		url.setValue("https://bintray.com/p9yp9y/vaos/download_file?file_path=p9yp9y%2Fvaos%2Fvaos-hello-app%2F0.0.3%2Fvaos-hello-app-0.0.3.jar");
 		url.setWidth("900px");
 		Button loadButton = new Button("Load");
 		loadButton.addClickListener(e -> {
