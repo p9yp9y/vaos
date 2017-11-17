@@ -7,10 +7,14 @@ import java.net.URLClassLoader;
 import p9yp9y.vaos.VaosApplication;
 
 public class InstallerUtil {
-	public void start(URL[] jarUrls, String className, String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public VaosApplication install(URL[] jarUrls, String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		URLClassLoader child = new URLClassLoader(jarUrls, this.getClass().getClassLoader());
 		Class classToLoad = Class.forName(className, true, child);
 		VaosApplication instance = (VaosApplication) classToLoad.newInstance();
-		instance.main(args);
+        return instance;
+	}
+	
+	public void start(VaosApplication vaosApplication, String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		vaosApplication.main(args);
 	}
 }

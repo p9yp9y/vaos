@@ -6,7 +6,7 @@
 	<groupId>p9yp9y</groupId>
 	<artifactId>vaos</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<name>vaos</name>
 
 	<prerequisites>
@@ -29,6 +29,11 @@
 			<id>clojars.org</id>
 			<url>http://clojars.org/repo</url>
 		</repository>
+		<repository>
+			<id>bintray</id>
+			<url>https://dl.bintray.com/p9yp9y/vaos</url>
+		</repository>
+
 	</repositories>
 
 	<dependencyManagement>
