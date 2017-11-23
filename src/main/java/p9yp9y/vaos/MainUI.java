@@ -14,10 +14,6 @@ import java.util.TimerTask;
 
 import javax.servlet.annotation.WebServlet;
 
-import p9yp9y.vaos.editor.EditorApplication;
-import p9yp9y.vaos.installer.InstallerApplication;
-import p9yp9y.vaos.settings.SettingsStore;
-
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -30,9 +26,13 @@ import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.MenuBar.MenuItem;
-import com.vaadin.ui.TextArea;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+
+import p9yp9y.vaos.browser.BrowserApplication;
+import p9yp9y.vaos.editor.EditorApplication;
+import p9yp9y.vaos.installer.InstallerApplication;
+import p9yp9y.vaos.settings.SettingsStore;
 
 @Theme("mytheme")
 @Push
@@ -59,6 +59,7 @@ public class MainUI extends UI {
 
         addWindowApplication(new InstallerApplication());
         addWindowApplication(new EditorApplication());
+        addWindowApplication(new BrowserApplication());
 
         appsPanel = new HorizontalLayout();
         appsPanel.setSpacing(false);
