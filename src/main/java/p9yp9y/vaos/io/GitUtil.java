@@ -11,9 +11,9 @@ import org.eclipse.jgit.api.errors.InvalidRemoteException;
 import org.eclipse.jgit.api.errors.TransportException;
 
 public class GitUtil {
-	public static void build(String name, String url) throws IOException, InvalidRemoteException, TransportException, GitAPIException {
+	public static void build(String url) throws IOException, InvalidRemoteException, TransportException, GitAPIException {
 		File gitDir = IOUtil.getGitDirectory();
-		File directory = new File(gitDir, name);
+		File directory = new File(gitDir, url.replaceAll(":|/|\\|@", "/"));
 		if (directory.exists()) {
 			PullResult git = Git.open(directory).pull().call();
 		} else {

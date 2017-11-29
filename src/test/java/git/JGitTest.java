@@ -13,6 +13,6 @@ public class JGitTest {
 
 	@Test
 	public void testClone() throws InvalidRemoteException, TransportException, GitAPIException, IOException {
-		GitUtil.build("vaos-dev", "https://github.com/p9yp9y/vaos-dev.git");
+		GitUtil.build("https://github.com/p9yp9y/vaos-hello-app.git");
 	}
 }	
