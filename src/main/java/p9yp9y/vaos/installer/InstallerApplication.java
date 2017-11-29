@@ -1,40 +1,49 @@
 package p9yp9y.vaos.installer;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
-import p9yp9y.vaos.VaosApplication;
-import p9yp9y.vaos.VaosWindowApplication;
+import org.eclipse.jgit.api.errors.GitAPIException;
 
+import com.vaadin.icons.VaadinIcons;
+import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
+import p9yp9y.vaos.VaosApplication;
+import p9yp9y.vaos.VaosWindowApplication;
+
 public class InstallerApplication extends VaosWindowApplication {
 
     public void main(String[] arg0) {
-        TextField url = new TextField("URL");
-        url.setValue("https://bintray.com/p9yp9y/vaos/download_file?file_path=p9yp9y%2Fvaos%2Fvaos-hello-app%2F0.0.3%2Fvaos-hello-app-0.0.3.jar");
-        url.setWidth("900px");
-        Button loadButton = new Button("Load");
-        loadButton.addClickListener(e -> {
+        TextField url = new TextField("Git URL");
+        url.setValue("https://github.com/p9yp9y/vaos-hello-app.git");
+        url.setWidth(600, Unit.PIXELS);
+        Button loadButton = new Button("Install");
+        loadButton.addClickListener(l -> {
             try {
-                URL[] jarUrls = new URL[]{new URL(url.getValue())};
-                VaosApplication app = new InstallerUtil().install(jarUrls, "p9yp9y.vaos.hello.HelloApplication");
+                VaosApplication app = new InstallerUtil().install(url.getValue(), "p9yp9y.vaos.hello.HelloApplication");
                 app.main(new String[]{});
             } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
-                | IllegalArgumentException | InvocationTargetException | MalformedURLException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
+                | IllegalArgumentException | InvocationTargetException | IOException | GitAPIException e) {
+                e.printStackTrace();
             }
         });
         VerticalLayout contentLayout = new VerticalLayout(url, loadButton);
-        contentLayout.setSizeFull();
         setContent(contentLayout);
+        contentLayout.setSizeUndefined();
+        setSizeUndefined();
+        setResizable(false);
     }
 
-    public String getName() {
+	@Override
+    public String getApplicationName() {
         return "Installer";
     }
+
+	@Override
+	public Resource getApplicationIcon() {
+		return VaadinIcons.PACKAGE;
+	}
 }

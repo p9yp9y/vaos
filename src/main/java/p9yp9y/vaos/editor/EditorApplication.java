@@ -1,9 +1,11 @@
 package p9yp9y.vaos.editor;
 
-import p9yp9y.vaos.VaosWindowApplication;
-
+import com.vaadin.icons.VaadinIcons;
+import com.vaadin.server.Resource;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.VerticalLayout;
+
+import p9yp9y.vaos.VaosWindowApplication;
 
 public class EditorApplication extends VaosWindowApplication {
 
@@ -15,7 +17,13 @@ public class EditorApplication extends VaosWindowApplication {
         setContent(contentLayout);
     }
 
-    public String getName() {
+	@Override
+    public String getApplicationName() {
         return "Editor";
     }
+
+	@Override
+	public Resource getApplicationIcon() {
+		return VaadinIcons.BOOK;
+	}
 }

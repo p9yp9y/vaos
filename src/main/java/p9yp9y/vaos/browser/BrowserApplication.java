@@ -1,6 +1,8 @@
 package p9yp9y.vaos.browser;
 
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.ExternalResource;
+import com.vaadin.server.Resource;
 import com.vaadin.shared.ui.ValueChangeMode;
 import com.vaadin.ui.BrowserFrame;
 import com.vaadin.ui.TextField;
@@ -34,12 +36,18 @@ public class BrowserApplication extends VaosWindowApplication {
 		
 		open("http://demo.vaadin.com/sampler/");
 	}
-
-	public String getName() {
-		return "Browser";
-	}
 	
 	public void open(String url) {
 		browser.setSource(new ExternalResource(url));
+	}
+
+	@Override
+	public String getApplicationName() {
+		return "Browser";
+	}
+
+	@Override
+	public Resource getApplicationIcon() {
+		return VaadinIcons.BROWSER;
 	}
 }

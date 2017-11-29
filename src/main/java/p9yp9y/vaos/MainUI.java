@@ -55,7 +55,7 @@ public class MainUI extends UI {
         clockButton = new Button();
 
         final MenuBar barmenu = new MenuBar();
-        menuItem = barmenu.addItem("", VaadinIcons.VAADIN_V, null);
+        menuItem = barmenu.addItem("vaos", VaadinIcons.VAADIN_V, null);
 
         addWindowApplication(new InstallerApplication());
         addWindowApplication(new EditorApplication());
@@ -86,7 +86,7 @@ public class MainUI extends UI {
     }
 
     private void addWindowApplication(VaosWindowApplication app) {
-         MenuItem editor = menuItem.addItem(app.getName(), null, (i) -> {
+         MenuItem editor = menuItem.addItem(app.getApplicationName(), app.getApplicationIcon(), (i) -> {
             addWindow(app);
         });
     }
@@ -115,8 +115,9 @@ public class MainUI extends UI {
     }
 
     private void addWindow(VaosWindowApplication subWindow) {
-        subWindow.setCaption(subWindow.getName());
-        Button b = new Button(subWindow.getCaption());
+        subWindow.setCaption(subWindow.getApplicationName());
+        subWindow.setIcon(subWindow.getApplicationIcon());
+        Button b = new Button(subWindow.getCaption(), subWindow.getIcon());
         topPanel.addComponent(b);
         b.addClickListener(l -> {
             subWindow.focus();
