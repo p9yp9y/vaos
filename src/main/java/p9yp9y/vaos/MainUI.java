@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
@@ -32,6 +31,7 @@ import com.vaadin.ui.VerticalLayout;
 import p9yp9y.vaos.browser.BrowserApplication;
 import p9yp9y.vaos.editor.EditorApplication;
 import p9yp9y.vaos.installer.InstallerApplication;
+import p9yp9y.vaos.io.IOUtil;
 import p9yp9y.vaos.settings.SettingsStore;
 
 @Theme("mytheme")
@@ -111,16 +111,7 @@ public class MainUI extends UI {
     }
 
     private File getSettingsStoreFile() throws IOException {
-        return getFile("settings.store");
-    }
-
-    private File getFile(String fileName) throws IOException {
-        String currentUsersHomeDir = System.getProperty("user.home");
-        File vaosfiles = new File(currentUsersHomeDir, ".vaos");
-        if (!vaosfiles.exists()) {
-            Files.createDirectories(vaosfiles.toPath());
-        }
-        return new File(vaosfiles, fileName);
+        return IOUtil.getFile("settings.store");
     }
 
     private void addWindow(VaosWindowApplication subWindow) {
