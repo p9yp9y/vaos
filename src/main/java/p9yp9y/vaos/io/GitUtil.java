@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.maven.cli.MavenCli;
 import org.codehaus.plexus.util.DirectoryScanner;
@@ -15,7 +17,7 @@ import org.eclipse.jgit.api.errors.InvalidRemoteException;
 import org.eclipse.jgit.api.errors.TransportException;
 
 public class GitUtil {
-	public static URL[] build(String url) throws IOException, InvalidRemoteException, TransportException, GitAPIException {
+	public static Set<URL> build(String url) throws IOException, InvalidRemoteException, TransportException, GitAPIException {
 		File gitDir = IOUtil.getGitDirectory();
 		File projectDir = new File(gitDir, url.replaceAll(":|/|\\|@", "/"));
 		String targetDir = projectDir + "/target";
@@ -36,12 +38,14 @@ public class GitUtil {
 		String[] files = scanner.getIncludedFiles();
 		return Arrays.asList(files).stream().map(f -> {
 			try {
-				return new File(targetDir, f).toURI().toURL();
+				URL fileUrl = new File(targetDir, f).toURI().toURL();
+				
+				return new URL("jar", "", fileUrl.toString() + "!/");
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 				return null;
 			}
 
-		}).toArray(URL[]::new);
+		}).collect(Collectors.toSet());
 	}
 }

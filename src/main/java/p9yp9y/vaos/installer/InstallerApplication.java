@@ -23,10 +23,10 @@ public class InstallerApplication extends VaosWindowApplication {
         Button loadButton = new Button("Install");
         loadButton.addClickListener(l -> {
             try {
-                VaosApplication app = new InstallerUtil().install(url.getValue(), "p9yp9y.vaos.hello.HelloApplication");
+                VaosApplication app = new InstallerUtil().install(url.getValue());
                 app.main(new String[]{});
             } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
-                | IllegalArgumentException | InvocationTargetException | IOException | GitAPIException e) {
+                | IllegalArgumentException | InvocationTargetException | IOException | GitAPIException | NoSuchFieldException e) {
                 e.printStackTrace();
             }
         });
