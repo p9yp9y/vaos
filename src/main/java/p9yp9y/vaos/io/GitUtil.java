@@ -28,7 +28,7 @@ public class GitUtil {
 		}
 		
 		MavenCli cli = new MavenCli();
-		cli.doMain(new String[]{"install", "-DskipTests"}, projectDir.toString(), System.out, System.err);
+		cli.doMain(new String[]{"clean", "install", "-DskipTests"}, projectDir.toString(), System.out, System.err);
 		
 		DirectoryScanner scanner = new DirectoryScanner();
 		scanner.setIncludes(new String[]{"**/*.jar"});

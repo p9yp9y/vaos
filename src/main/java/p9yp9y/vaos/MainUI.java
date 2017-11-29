@@ -85,9 +85,14 @@ public class MainUI extends UI {
         //nodejs /home/andris/wetty/app.js -p 3001
     }
 
-    private void addWindowApplication(VaosWindowApplication app) {
-         MenuItem editor = menuItem.addItem(app.getApplicationName(), app.getApplicationIcon(), (i) -> {
-            addWindow(app);
+    private MenuItem addWindowApplication(VaosWindowApplication app) {
+         return menuItem.addItem(app.getApplicationName(), app.getApplicationIcon(), (i) -> {
+            try {
+				addWindow(app.getClass().newInstance());
+			} catch (InstantiationException | IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         });
     }
 

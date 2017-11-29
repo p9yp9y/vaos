@@ -6,9 +6,11 @@ import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.jar.JarEntry;
 
+import org.apache.commons.io.FilenameUtils;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
 import org.eclipse.jgit.api.errors.TransportException;
@@ -27,18 +29,27 @@ public class InstallerUtil {
 		JarURLConnection uc = (JarURLConnection)jarUrl.openConnection();
 		
 		Enumeration<JarEntry> entries = uc.getJarFile().entries();
+		Set<String> classSet = new HashSet<>();
 				
 		while (entries.hasMoreElements()) {
 			JarEntry e = entries.nextElement();
 			String name = e.getName();
+			if (name.toLowerCase().endsWith(".class")) {
+				classSet.add(FilenameUtils.removeExtension(name).replaceAll("\\||/", "."));
+			}
 		}
 		
-		ClassLoader cLoader = new URLClassLoader(new URL[] {jarUrl}, null);
+		ClassLoader cLoader = new URLClassLoader(new URL[] {jarUrl}, this.getClass().getClassLoader());
+		String classNameToLoad = classSet.stream().filter(cn -> {
+			try {
+				return Class.forName(cn, true, cLoader).getClass().isInstance(Object.class);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}).limit(1).findFirst().get();
 		
-//		Class<?> classToLoad = classes.stream().filter(c -> c.isAnnotationPresent(VaosMainApplication.class)).findFirst().get();
-
-//		VaosApplication instance = (VaosApplication) classToLoad.newInstance();
-		Class<?> classToLoad = Class.forName("p9yp9y.vaos.hello.HelloApplication", true, cLoader);
+		Class<?> classToLoad = Class.forName(classNameToLoad, true, cLoader);
 		return (VaosApplication) classToLoad.newInstance();
 	}
 
