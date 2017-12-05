@@ -21,16 +21,16 @@ import p9yp9y.vaos.io.GitUtil;
 public class InstallerUtil {
 	public VaosApplication install(String gitUrl) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException, InvalidRemoteException, TransportException, IOException, GitAPIException, NoSuchFieldException {
-		Set<URL> jarUrls = GitUtil.build(gitUrl);	
+		Set<URL> jarUrls = GitUtil.build(gitUrl);
 		return install(jarUrls.iterator().next());
 	}
-	
+
 	public VaosApplication install(URL jarUrl) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
-		JarURLConnection uc = (JarURLConnection)jarUrl.openConnection();
-		
+		JarURLConnection uc = (JarURLConnection) jarUrl.openConnection();
+
 		Enumeration<JarEntry> entries = uc.getJarFile().entries();
 		Set<String> classSet = new HashSet<>();
-				
+
 		while (entries.hasMoreElements()) {
 			JarEntry e = entries.nextElement();
 			String name = e.getName();
@@ -38,8 +38,8 @@ public class InstallerUtil {
 				classSet.add(FilenameUtils.removeExtension(name).replaceAll("\\||/", "."));
 			}
 		}
-		
-		ClassLoader cLoader = new URLClassLoader(new URL[] {jarUrl}, this.getClass().getClassLoader());
+
+		ClassLoader cLoader = new URLClassLoader(new URL[] { jarUrl }, this.getClass().getClassLoader());
 		String classNameToLoad = classSet.stream().filter(cn -> {
 			try {
 				return Class.forName(cn, true, cLoader).getClass().isInstance(Object.class);
@@ -48,7 +48,7 @@ public class InstallerUtil {
 				return false;
 			}
 		}).limit(1).findFirst().get();
-		
+
 		Class<?> classToLoad = Class.forName(classNameToLoad, true, cLoader);
 		return (VaosApplication) classToLoad.newInstance();
 	}
